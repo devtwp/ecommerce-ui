@@ -1,38 +1,5 @@
-<div class="container">
-  <h1 class="title">Tienda de Productos</h1>
-  
-  <!-- Listado de productos -->
-  <div class="products">
-    <div 
-      class="product-card" 
-      *ngFor="let product of paginatedProducts">
-      <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
-      <h3 class="product-name">{{ product.name }}</h3>
-      <p class="product-description">{{ product.description }}</p>
-      <p class="product-price">$ {{ product.price | number: '1.2-2' }}</p>
-    </div>
-  </div>
-
-  <!-- Paginación -->
-  <div class="pagination">
-    <button 
-      class="pagination-button" 
-      (click)="goToPage(currentPage - 1)" 
-      [disabled]="currentPage === 1">
-      Anterior
-    </button>
-
-    <span class="pagination-info">
-      Página {{ currentPage }} de {{ totalPages }}
-    </span>
-
-    <button 
-      class="pagination-button" 
-      (click)="goToPage(currentPage + 1)" 
-      [disabled]="currentPage === totalPages">
-      Siguiente
-    </button>
-  </div>
-</div>
+<header></header>
 
 <router-outlet></router-outlet>
+
+<footer></footer>
