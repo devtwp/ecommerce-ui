@@ -1,0 +1,21 @@
+<header class="bg-white shadow-md p-4 flex justify-between items-center">
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center">
+        <img src="assets/images/logo.jpg" alt="Logo" class="h-20">
+    </a>
+
+    <!-- Menú -->
+    <nav class="flex space-x-6">
+        <a routerLink="/productos" class="hover:text-gray-600 text-lg">Productos</a>
+        <a routerLink="/sobre-nosotros" class="hover:text-gray-600 text-lg">Mi pedido</a>
+        <a routerLink="/informacion" class="hover:text-gray-600 text-lg">Información</a>
+    </nav>
+
+    <!-- Carrito -->
+    <a routerLink="/carrito" class="relative">
+        <i class="fas fa-shopping-cart text-2xl text-gray-700 hover:text-gray-900"></i>
+        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">
+            3 <!-- número de productos en el carrito -->
+        </span>
+    </a>
+</header>
