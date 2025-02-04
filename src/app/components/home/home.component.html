@@ -1,3 +1,7 @@
+<app-hero></app-hero>
+<app-menu></app-menu>
+<router-outlet></router-outlet>
+
 <div class="container mx-auto px-6 py-12">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         <app-product-card *ngFor="let producto of productos" [producto]="producto" (click)="abrirModal(producto)">
@@ -15,5 +19,5 @@
                [hidePageSize]="hidePageSize"
                [pageIndex]="pageIndex"
                aria-label="Select page">
-</mat-paginator>
+    </mat-paginator>
 </div>

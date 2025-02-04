@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductModalComponent } from '../modals/product-modal/product-modal.component';
+import { HeroComponent } from '../hero/hero.component';
+import { MenuComponent } from '../menu/menu.component';
 import { PageEvent } from '@angular/material/paginator';
 
 interface PaginatedResponse<T> {

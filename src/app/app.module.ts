@@ -13,6 +13,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { HeroComponent } from './components/hero/hero.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { ListadoHamburguesasComponent } from './components/listado-hamburguesas/listado-hamburguesas.component';
+import { Routes } from '@angular/router';
+
+const appRoutes:Routes=[
+  {path:'', component:HomeComponent}
+];
 
 @NgModule({
   declarations: [
@@ -20,8 +28,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    HeroComponent,
+    MenuComponent,
     ProductCardComponent,
-    ProductModalComponent
+    ProductModalComponent,
+    ListadoHamburguesasComponent
   ],
   imports: [
     BrowserModule,
