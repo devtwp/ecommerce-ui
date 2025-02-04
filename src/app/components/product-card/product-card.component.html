@@ -1,1 +1,13 @@
-<p>product-card works!</p>
+<div class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer hover:bg-blue-300">
+    <img class="w-full h-64 object-cover" [src]="producto.imagen" alt="{{ producto.nombre }}">
+    <div class="p-4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2 text-center">{{ producto.nombre }}</h3>
+        <div class="flex align-bottom">
+            <p class="text-lg text-gray-600 mb-4">{{ producto.precio | currency:'USD' }}</p>
+            <button
+                class="flex items-center justify-center w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">
+                <i class="fas fa-shopping-cart mr-2"></i> Agregar al carrito
+            </button>
+        </div>
+    </div>
+</div>

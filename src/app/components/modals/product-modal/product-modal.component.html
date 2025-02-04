@@ -1,0 +1,45 @@
+<!-- Modal -->
+<div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-lg shadow-lg">
+            <!-- Header -->
+            <div class="modal-header bg-gray-800 text-white relative p-3">
+                <h5 class="modal-title" id="productoModalLabel">{{ data?.nombre }}</h5>
+                <!-- Icono X para cerrar -->
+                <button type="button" class="absolute top-0 right-0 p-2 text-white text-xl hover:text-gray-300"
+                    data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
+                    <i class="fas fa-times"></i> <!-- Icono de FontAwesome para la X -->
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body p-6">
+                <!-- Imagen del producto -->
+                <div class="mb-4">
+                    <img class="w-full h-64 object-cover rounded-lg shadow-md" [src]="data?.imagen"
+                        alt="{{ data?.nombre }}">
+                </div>
+
+                <!-- Información del producto -->
+                <p class="text-lg font-semibold"><strong>Precio:</strong> {{ data?.precio | currency:'USD' }}</p>
+
+                <!-- Campo de cantidad -->
+                <div class="form-group mt-6">
+                    <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad:</label>
+                    <input id="cantidad" type="number"
+                        class="form-control mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        [(ngModel)]="data.cantidad" min="1" />
+                </div>
+
+                <!-- Agregar más propiedades aquí, como tamaño, ingredientes, etc. -->
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer bg-gray-100 p-4 rounded-b-lg">
+                <!-- Botón para agregar al carrito -->
+                <button type="button" class="btn btn-primary bg-green-500 text-white hover:bg-green-600"
+                    (click)="agregar()">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
