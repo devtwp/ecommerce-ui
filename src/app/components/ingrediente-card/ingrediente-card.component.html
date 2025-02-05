@@ -1,0 +1,7 @@
+<div class="flex justify-between p-2">
+  <div>
+      <p class="text-sm">{{ ingrediente.ingrediente }}</p>
+       <p class="text-sm">{{ ingrediente?.precio | currency: 'USD' }}</p>
+  </div>
+  <input type="checkbox" [checked]="seleccionado" (change)="onCheckboxChange()" />
+</div>

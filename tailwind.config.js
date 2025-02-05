@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        calistoga: ['Calistoga', 'sans-serif'], // Nombre de la fuente que has importado
+        calistoga: ['Calistoga', 'sans-serif'],
+        rubik: ['Rubik', 'sans-serif'],
       },
     },
   },

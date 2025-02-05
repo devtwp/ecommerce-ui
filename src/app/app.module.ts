@@ -16,10 +16,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { HeroComponent } from './components/hero/hero.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ListadoHamburguesasComponent } from './components/listado-hamburguesas/listado-hamburguesas.component';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { IngredienteCardComponent } from './components/ingrediente-card/ingrediente-card.component';
 
 const appRoutes:Routes=[
-  {path:'', component:HomeComponent}
+  {path:'', component:HomeComponent},
+  {path:'hamburguesas', component:ListadoHamburguesasComponent}
 ];
 
 @NgModule({
@@ -32,7 +34,8 @@ const appRoutes:Routes=[
     MenuComponent,
     ProductCardComponent,
     ProductModalComponent,
-    ListadoHamburguesasComponent
+    ListadoHamburguesasComponent,
+    IngredienteCardComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ const appRoutes:Routes=[
     BrowserAnimationsModule,
     MatDialogModule,
     NgxPaginationModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'top' })
   ],
   providers: [],
   bootstrap: [AppComponent]
