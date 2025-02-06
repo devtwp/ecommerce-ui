@@ -17,6 +17,9 @@ export class ProductModalComponent implements OnInit {
 
   // Listado de ingredientes
   listadoIngredientesTieneJSON = [
+    { 'ingrediente': 'LISTA INGREDIENTES'},
+    { 'ingrediente': 'LISTA INGREDIENTES'},
+    { 'ingrediente': 'LISTA INGREDIENTES'},
     { 'ingrediente': 'LISTA INGREDIENTES'}
   ];
   listadoIngredientesAgregarJSON = [
