@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IngredienteCardComponent } from '../../ingrediente-card/ingrediente-card.component';
+import { CarritoService } from 'src/app/services/carrito.service';
 
 @Component({
   selector: 'app-modal-producto',
@@ -17,27 +17,44 @@ export class ProductModalComponent implements OnInit {
 
   // Listado de ingredientes
   listadoIngredientesTieneJSON = [
-    { 'ingrediente': 'LISTA INGREDIENTES'},
-    { 'ingrediente': 'LISTA INGREDIENTES'},
-    { 'ingrediente': 'LISTA INGREDIENTES'},
-    { 'ingrediente': 'LISTA INGREDIENTES'}
+    { ingrediente: 'LISTA INGREDIENTES'},
+    { ingrediente: 'LISTA INGREDIENTES'},
+    { ingrediente: 'LISTA INGREDIENTES'},
+    { ingrediente: 'LISTA INGREDIENTES'}
   ];
   listadoIngredientesAgregarJSON = [
-    { 'ingrediente': 'LISTA INGREDIENTES', 'precio': 123 },
-    { 'ingrediente': 'LISTA INGREDIENTES', 'precio': 123 },
-    { 'ingrediente': 'LISTA INGREDIENTES', 'precio': 123 },
-    { 'ingrediente': 'LISTA INGREDIENTES', 'precio': 123 }
+    { ingrediente: 'LISTA INGREDIENTES', precio: 123 },
+    { ingrediente: 'LISTA INGREDIENTES', precio: 123 },
+    { ingrediente: 'LISTA INGREDIENTES', precio: 123 },
+    { ingrediente: 'LISTA INGREDIENTES', precio: 123 }
   ];
 
+  // LISTAS DE INGREDIENTES QUE TIENE Y SE PUEDE AGREGAR A LA HAMBURGUESA
   listadoIngredientesTiene: any[] = [];
   listadoIngredientesAgregar: any[] = [];
 
-  // Emitir el evento para agregar al carrito
-  @Output() agregarAlCarrito = new EventEmitter<{ producto: any, cantidad: number }>();
+
+  // LISTAS DE INGREDIENTEES ELIMINADOS Y AGREGADOS
+  listadoIngredientesAgregados: any[] = []
+  listadoIngredientesEliminados: any[] = []
+
+  agregar() {
+    // Usamos el servicio para agregar el producto al carrito
+    this.carritoService.agregarProducto({
+      nombre: this.data.nombre,
+      precioTotal: this.precioTotal,
+      ingredientesEliminados: this.listadoIngredientesEliminados,
+      ingredientesAgregados: this.listadoIngredientesAgregados,
+      imagen: this.data.imagen
+    });
+
+    this.closeModal();  // Cierra el modal 
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<ProductModalComponent>
+    public dialogRef: MatDialogRef<ProductModalComponent>,
+    private carritoService: CarritoService
   ) { }
 
   // Establecer precioTotal en ngOnInit para asegurarnos de que ingrediente esté disponible
@@ -59,31 +76,24 @@ export class ProductModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  agregar() {
-    this.agregarAlCarrito.emit({ producto: this.data, cantidad: this.data.cantidad });
-    this.closeModal();  // Cerrar el modal al agregar al carrito
-  }
 
   calcularPrecio() {
     let diferencia:number = 0;
-    this.listadoElementosAgregados.forEach(ingrediente => {
+    this.listadoIngredientesAgregados.forEach(ingrediente => {
       diferencia += ingrediente.precio;
     });
     
     this.precioTotal = this.data.precio + diferencia; 
   }
 
-  listadoElementosAgregados: any[] = []
-  listadoElementosEliminados: any[] = []
-
   actualizarListadoSeleccionados(event: any) {
     const { ingrediente, seleccionado } = event;
     if (seleccionado) {
       // Agregar el ingrediente al listado
-      this.listadoElementosAgregados.push(ingrediente);
+      this.listadoIngredientesAgregados.push(ingrediente);
     } else {
       // Eliminar el ingrediente del listado
-      this.listadoElementosAgregados = this.listadoElementosAgregados.filter(i => i !== ingrediente);
+      this.listadoIngredientesAgregados = this.listadoIngredientesAgregados.filter(i => i !== ingrediente);
     }
     this.calcularPrecio();
   }
@@ -93,10 +103,10 @@ export class ProductModalComponent implements OnInit {
     const { ingrediente, seleccionado } = event;
     if (seleccionado) {
       // Agregar el ingrediente al listado
-      this.listadoElementosEliminados.push(ingrediente);
+      this.listadoIngredientesEliminados.push(ingrediente);
     } else {
       // Eliminar el ingrediente del listado
-      this.listadoElementosEliminados = this.listadoElementosEliminados.filter(i => i !== ingrediente);
+      this.listadoIngredientesEliminados = this.listadoIngredientesEliminados.filter(i => i !== ingrediente);
     }
   }
 }

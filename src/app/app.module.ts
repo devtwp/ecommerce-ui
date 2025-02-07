@@ -18,6 +18,8 @@ import { MenuComponent } from './components/menu/menu.component';
 import { ListadoHamburguesasComponent } from './components/listado-hamburguesas/listado-hamburguesas.component';
 import { RouterModule, Routes } from '@angular/router';
 import { IngredienteCardComponent } from './components/ingrediente-card/ingrediente-card.component';
+import { CommonModule } from '@angular/common';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 const appRoutes:Routes=[
   {path:'', component:HomeComponent},
@@ -35,10 +37,12 @@ const appRoutes:Routes=[
     ProductCardComponent,
     ProductModalComponent,
     ListadoHamburguesasComponent,
-    IngredienteCardComponent
+    IngredienteCardComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
