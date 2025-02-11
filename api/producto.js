@@ -6,15 +6,7 @@ const pool = new Pool({
 });
 
 export default async function handler(req, res) {
-  // Permitir solo estos orígenes
-  const allowedOrigins = [
-    'https://lacachila-git-api-test-devtwp1-gmailcoms-projects.vercel.app',
-    'http://localhost:4200'
-  ];
-
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Vary', 'Origin');
-
+  res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   // Manejo de preflight (CORS)

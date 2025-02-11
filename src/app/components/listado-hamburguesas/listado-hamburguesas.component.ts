@@ -45,7 +45,7 @@ export class ListadoHamburguesasComponent {
       }*/ 
         next: (productos) => {
           console.log(productos); 
-          this.productosJson = productos;
+          this.productos = productos;
         },
         error: (error) => {
           console.error('Error al cargar productos', error);
