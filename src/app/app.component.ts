@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  implements OnInit {
+  [x: string]: any;
   products = [
     { id: 1, name: 'Producto 1', description: 'Descripción 1', price: 100, image: 'https://media.istockphoto.com/id/1309352410/es/foto/hamburguesa-con-queso-con-tomate-y-lechuga-en-tabla-de-madera.jpg?s=612x612&w=0&k=20&c=HaSLXFFns4_IHfbvWY7_FX7tlccVjl0s0BrlqaLHOTE=' },
     { id: 2, name: 'Producto 2', description: 'Descripción 2', price: 200, image: 'https://media.istockphoto.com/id/1448322070/es/foto/sabrosa-hamburguesa-fresca-en-mesa-de-madera.jpg?s=612x612&w=0&k=20&c=JrAb5GidOn0_mUEnsncdUQfmKwKtYC5p-JemGfpQN0w=' },

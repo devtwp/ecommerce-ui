@@ -13,6 +13,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { HeroComponent } from './components/hero/hero.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { ListadoHamburguesasComponent } from './components/listado-hamburguesas/listado-hamburguesas.component';
+import { RouterModule, Routes } from '@angular/router';
+import { IngredienteCardComponent } from './components/ingrediente-card/ingrediente-card.component';
+
+const appRoutes:Routes=[
+  {path:'', component:HomeComponent},
+  {path:'hamburguesas', component:ListadoHamburguesasComponent}
+];
 
 @NgModule({
   declarations: [
@@ -20,8 +30,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    HeroComponent,
+    MenuComponent,
     ProductCardComponent,
-    ProductModalComponent
+    ProductModalComponent,
+    ListadoHamburguesasComponent,
+    IngredienteCardComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +44,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     BrowserAnimationsModule,
     MatDialogModule,
     NgxPaginationModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'top' })
   ],
   providers: [],
   bootstrap: [AppComponent]

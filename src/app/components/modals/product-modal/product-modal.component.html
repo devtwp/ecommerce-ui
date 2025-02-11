@@ -1,44 +1,58 @@
 <!-- Modal -->
-<div class="modal fade" id="productoModal" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content rounded-lg shadow-lg">
-            <!-- Header -->
-            <div class="modal-header bg-gray-800 text-white relative p-3">
-                <h5 class="modal-title" id="productoModalLabel">{{ data?.nombre }}</h5>
-                <!-- Icono X para cerrar -->
-                <button type="button" class="absolute top-0 right-0 p-2 text-white text-xl hover:text-gray-300"
+<div class="bg-black">
+    <div class="max-w-5xl mx-auto">
+        <div class="modal-content rounded-lg shadow-l">
+            <div class="font-rubik text-white grid md:grid-cols-2 gap-4 p-5">
+
+                <!-- Botón de cerrar -->
+                <button type="button" class="absolute top-0 right-0 p-2 pr-4 text-white text-xl hover:text-gray-300"
                     data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
                     <i class="fas fa-times"></i> <!-- Icono de FontAwesome para la X -->
                 </button>
-            </div>
 
-            <!-- Body -->
-            <div class="modal-body p-6">
                 <!-- Imagen del producto -->
-                <div class="mb-4">
-                    <img class="w-full h-64 object-cover rounded-lg shadow-md" [src]="data?.imagen"
+                <div class="flex items-center justify-center overflow-hidden rounded-lg">
+                    <img class="rounded-sm w-full md:w-[35rem] h-[30rem] object-cover" [src]="data?.imagen"
                         alt="{{ data?.nombre }}">
                 </div>
 
                 <!-- Información del producto -->
-                <p class="text-lg font-semibold"><strong>Precio:</strong> {{ data?.precio | currency:'USD' }}</p>
+                <div class="flex flex-col justify-between p-5">
+                    <div class="flex flex-col gap-5 overflow-y-auto pr-5 max-h-96 custom-scroll">
+                        <div class="flex flex-col">
+                            <h2 class="text-2xl font-bold">{{ data?.nombre }}</h2>
+                            <p class="text-base text-gray-400 font-medium mt-1">{{ data?.descripcion }}</p>
+                        </div>
 
-                <!-- Campo de cantidad -->
-                <div class="form-group mt-6">
-                    <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad:</label>
-                    <input id="cantidad" type="number"
-                        class="form-control mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        [(ngModel)]="data.cantidad" min="1" />
+                        <!-- LISTADO DE INGREDIENTES FALTANTES -->
+                        <div>
+                            <h1 class="text-lg font-semibold">Agregar a la {{data?.nombre}}</h1>
+                            <ul>
+                                <app-ingrediente-card *ngFor="let ingrediente of listadoIngredientesAgregar" [ingrediente]="ingrediente" (cambioSeleccion)="actualizarListadoSeleccionados($event)">
+                                </app-ingrediente-card>
+                            </ul>
+                        </div>
+
+                        <!-- LISTADO DE INGREDIENTES A QUITAR -->
+                        <h1 class="text-lg font-semibold">Sacar de la {{ data?.nombre }}</h1>
+                        <ul>
+                            <li *ngFor="let ingrediente of listadoIngredientesTiene">
+                                <app-ingrediente-card *ngFor="let ingrediente of listadoIngredientesTiene" [ingrediente]="ingrediente" (cambioSeleccion)="actualizarListadoEliminados($event)">
+                                </app-ingrediente-card>
+                        </ul>
+                        
+                    </div>
+
+                    <!-- Botón para agregar al carrito -->
+                    <div class="p-4">
+                        <button type="button"
+                            class="flex justify-between w-full p-3 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600"
+                            (click)="agregar()">
+                            <p>Agregar</p>
+                            <p>{{ precioTotal | currency:'USD' }}</p>
+                        </button>
+                    </div>
                 </div>
-
-                <!-- Agregar más propiedades aquí, como tamaño, ingredientes, etc. -->
-            </div>
-
-            <!-- Footer -->
-            <div class="modal-footer bg-gray-100 p-4 rounded-b-lg">
-                <!-- Botón para agregar al carrito -->
-                <button type="button" class="btn btn-primary bg-green-500 text-white hover:bg-green-600"
-                    (click)="agregar()">Agregar al carrito</button>
             </div>
         </div>
     </div>

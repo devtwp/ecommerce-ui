@@ -1,0 +1,7 @@
+.tituloMenu{
+    background-image: url("/assets/images/fondoTitulo.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    letter-spacing: 1px;
+    color: white;
+}
