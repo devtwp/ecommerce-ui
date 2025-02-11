@@ -6,7 +6,17 @@ const pool = new Pool({
 });
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://lacachila-git-api-test-devtwp1-gmailcoms-projects.vercel.app, http://localhost:4200');
+  const allowedOrigins = [
+    'https://lacachila-git-api-test-devtwp1-gmailcoms-projects.vercel.app',
+    'http://localhost:4200'
+  ];
+
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    console.log('Origin: ' +origin);
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   // Manejo de preflight (CORS)
