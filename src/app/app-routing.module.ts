@@ -5,7 +5,7 @@ import { ListadoHamburguesasComponent } from './components/listado-hamburguesas/
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'hamburguesas', component: ListadoHamburguesasComponent }  // Configura la ruta inicial 
+  { path: 'hamburguesas', component: ListadoHamburguesasComponent }
 ];
 
 @NgModule({

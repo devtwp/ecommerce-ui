@@ -7,9 +7,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductoService {
-  private apiUrl = `${window.location.origin}/api/producto`; // URL de la API en Vercel
+  private origin = window.location.origin.includes("localhost") ? "https://lacachila-git-api-test-devtwp1-gmailcoms-projects.vercel.app" : window.location.origin;
 
-  constructor(private http: HttpClient) {}
+  private apiUrl = this.origin + `/api/producto`; // URL de la API en Vercel
+
+  constructor(private http: HttpClient) { }
 
   getProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiUrl);
