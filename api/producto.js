@@ -1,4 +1,5 @@
 import { Pool } from 'pg';
+import Cors from 'nextjs-cors';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // Definir en Vercel
@@ -6,19 +7,19 @@ const pool = new Pool({
 });
 
 export default async function handler(req, res) {
-  const allowedOrigins = [
-    'https://lacachila-git-api-test-devtwp1-gmailcoms-projects.vercel.app',
-    'http://localhost:4200'
-  ];
-
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    console.log('Origin: ' +origin);
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+  await Cors(req, res, {
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: ['https://lacachila-git-api-test-devtwp1-gmailcoms-projects.vercel.app', 'http://localhost:4200'],
+    allowedHeaders: ['Content-Type'],
+  });
+  
+  /*const origin = req.headers.origin;
+  console.log('Origin: ' + origin);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Vary', 'Origin');
 
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');*/
   // Manejo de preflight (CORS)
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
