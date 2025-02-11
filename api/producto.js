@@ -6,6 +6,9 @@ const pool = new Pool({
 });
 
 export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Permitir todas las conexiones (ajústalo en producción)
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Método no permitido' });
   }
