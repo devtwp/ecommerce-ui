@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModalComponent } from '../modals/product-modal/product-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ProductoService } from 'src/app/services/producto.service';
 
 
 @Component({
@@ -33,23 +34,24 @@ export class ListadoHamburguesasComponent{
   modalProducto: any = null;
   cantidad: number = 1;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private productoService: ProductoService) { }
 
   ngOnInit() {
     this.cargarProductos();
   }
 
   cargarProductos() {
-    /*this.productoService.getProductos(page, this.itemsPerPage).subscribe(
-      (response: PaginatedResponse<any>) => {
+
+    this.productoService.getProductos(/*page, this.itemsPerPage*/).subscribe(
+      /*(response: PaginatedResponse<any>) => {
         this.productos = response.items;
         this.currentPage = response.currentPage;
         this.totalItems = response.totalItems;
-      },
-      error => {
+      }*/ (res:any) => console.log(res),
+      (error:any) => {
         console.error('Error al cargar productos', error);
       }
-    );*/
+    );
 
     this.productos = this.productosJson.slice();
   }
