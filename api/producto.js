@@ -1,22 +1,20 @@
 import { Pool } from 'pg';
-import Cors from 'micro-cors';
-
-const cors = Cors({
-  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  origin: '*',
-});
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+  connectionString: process.env.DATABASE_URL, // Definir en Vercel
+  ssl: { rejectUnauthorized: false }, // Necesario si usas PostgreSQL en la nube
 });
 
-async function handler(req, res) {
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://lacachila-git-api-test-devtwp1-gmailcoms-projects.vercel.app, http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  // Manejo de preflight (CORS)
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    return res.status(200).end();
   }
 
+  // Solo permitir GET
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Método no permitido' });
   }
@@ -28,5 +26,3 @@ async function handler(req, res) {
     res.status(500).json({ error: 'Error al obtener productos', details: error.message });
   }
 }
-
-export default cors(handler);
