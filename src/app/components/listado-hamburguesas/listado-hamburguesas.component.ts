@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModalComponent } from '../modals/product-modal/product-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ProductoService } from 'src/app/services/producto.service';
+import { Producto } from 'src/assets/dto/Producto';
 
 
 @Component({
@@ -9,18 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./listado-hamburguesas.component.css']
 })
 
-export class ListadoHamburguesasComponent{
-  productosJson = [
-    { nombre: 'Hamburguesa 1', precio: 10.99, imagen: 'https://www.clarin.com/2022/05/27/0HXb0UR0v_1256x620__2.jpg', descripcion: 'Doble hamburguesa de carne premium (240g) con queso cheddar americano, tocino, cebolla crispy y mayo secreta.' },
-    { nombre: 'Hamburguesa 2', precio: 12.99, imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqIvY_EddgWVLKNZD3S-xTjijRkfogKFxFkA&s', descripcion: 'ASAFDSA' },
-    { nombre: 'Hamburguesa 3', precio: 19.99, imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsTyKw7ht0CnSiwAoyRQxnO3Bpf0dN0xc0tseqB7tO3XrelX82uSg3jjFcUCjTbKU9d1g&usqp=CAU', descripcion: 'ASAFDSA' },
-    { nombre: 'Hamburguesa 4', precio: 14.99, imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP52-cKeg2nZ-UB1IlUHFG7zKomAdUdyfvhIsWj9e93Ta3BEVaStH5I7-Fuj7AnnFADXo&usqp=CAU', descripcion: 'ASAFDSA' },
-    { nombre: 'Hamburguesa 5', precio: 11.49, imagen: 'https://www.lanacion.com.ar/resizer/v2/investigadores-evaluaron-las-principales-cadenas-FHBQ5XJM55H2PFSAFSC6HHESVQ.jpg?auth=c14fd6c0f7fd21e554cb59b5d69f7ee3551b78c00f500eb190a79ae39dc0ae80&width=420&height=280&quality=70&smart=true', descripcion: 'ASAFDSA' },
-    { nombre: 'Hamburguesa 6', precio: 13.49, imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqIvY_EddgWVLKNZD3S-xTjijRkfogKFxFkA&s', descripcion: 'ASAFDSA' },
-    { nombre: 'Hamburguesa 7', precio: 15.99, imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsTyKw7ht0CnSiwAoyRQxnO3Bpf0dN0xc0tseqB7tO3XrelX82uSg3jjFcUCjTbKU9d1g&usqp=CAU', descripcion: 'ASAFDSA' },
-    { nombre: 'Hamburguesa 8', precio: 16.99, imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP52-cKeg2nZ-UB1IlUHFG7zKomAdUdyfvhIsWj9e93Ta3BEVaStH5I7-Fuj7AnnFADXo&usqp=CAU', descripcion: 'ASAFDSA' },
-    { nombre: 'Hamburguesa 9', precio: 18.99, imagen: 'https://www.lanacion.com.ar/resizer/v2/investigadores-evaluaron-las-principales-cadenas-FHBQ5XJM55H2PFSAFSC6HHESVQ.jpg?auth=c14fd6c0f7fd21e554cb59b5d69f7ee3551b78c00f500eb190a79ae39dc0ae80&width=420&height=280&quality=70&smart=true', descripcion: 'ASAFDSA' }
-  ];
+export class ListadoHamburguesasComponent {
+  productosJson: Producto[] = [];
 
   productos: any[] = [];
   length = 9;
@@ -33,23 +25,37 @@ export class ListadoHamburguesasComponent{
   modalProducto: any = null;
   cantidad: number = 1;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private productoService: ProductoService) { }
 
   ngOnInit() {
     this.cargarProductos();
   }
 
   cargarProductos() {
-    /*this.productoService.getProductos(page, this.itemsPerPage).subscribe(
-      (response: PaginatedResponse<any>) => {
+
+    this.productoService.getProductos(/*page, this.itemsPerPage*/).subscribe({
+      /*(response: PaginatedResponse<any>) => {
         this.productos = response.items;
         this.currentPage = response.currentPage;
         this.totalItems = response.totalItems;
-      },
-      error => {
+        (res: any) => { console.log(res), this.productosJson = res },
+      (error: any) => {
         console.error('Error al cargar productos', error);
       }
-    );*/
+      }*/ 
+        next: (productos) => {
+          console.log(productos); 
+          this.productos = productos;
+        },
+        error: (error) => {
+          console.error('Error al cargar productos', error);
+        },
+        complete: () => {
+          console.log('Complete');
+        }
+     
+      }
+    );
 
     this.productos = this.productosJson.slice();
   }

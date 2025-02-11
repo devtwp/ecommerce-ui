@@ -18,11 +18,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { ListadoHamburguesasComponent } from './components/listado-hamburguesas/listado-hamburguesas.component';
 import { RouterModule, Routes } from '@angular/router';
 import { IngredienteCardComponent } from './components/ingrediente-card/ingrediente-card.component';
-
-const appRoutes:Routes=[
-  {path:'', component:HomeComponent},
-  {path:'hamburguesas', component:ListadoHamburguesasComponent}
-];
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,7 +41,7 @@ const appRoutes:Routes=[
     MatDialogModule,
     NgxPaginationModule,
     MatPaginatorModule,
-    RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'top' })
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
