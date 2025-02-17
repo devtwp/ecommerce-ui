@@ -14,7 +14,7 @@ import { Producto } from 'src/assets/dto/Producto';
 export class ListadoHamburguesasComponent {
   productosJson: Producto[] = [];
 
-  productos: any[] = [];
+  productos: Producto[] = [];
   length = 9;
 
   hidePageSize = false;
@@ -48,7 +48,7 @@ export class ListadoHamburguesasComponent {
       }*/
         
         next: (productos) => {
-          console.log(productos); 
+          console.log(productos);
           this.productos = productos;
         },
         error: (error) => {
@@ -66,7 +66,7 @@ export class ListadoHamburguesasComponent {
     this.productos = this.productosJson.slice();
   }
 
-  abrirModal(producto: any) {
+  abrirModal(producto: Producto) {
     const dialogRef = this.dialog.open(ProductModalComponent, {
       data: producto
     });
@@ -75,7 +75,7 @@ export class ListadoHamburguesasComponent {
     });
   }
 
-  manejarAgregarAlCarrito(event: { producto: any, cantidad: number }) {
+  manejarAgregarAlCarrito(event: { producto: Producto, cantidad: number }) {
     console.log('Producto agregado al carrito:', event.producto, 'Cantidad:', event.cantidad);
     // Lógica para agregar al carrito
   }

@@ -2,7 +2,7 @@
     <div class="info col-span-2 text-white flex flex-col justify-between m-4">
         <h2 class="font-extrabold text-lg">{{producto.nombre}}</h2>
         <h3 class="line-clamp-3 text-xs max-h-[3rem] font-medium">{{producto.descripcion}}</h3>
-        <h2 class="text-x mt-2 font-light">${{producto.precio}}</h2>
+        <h2 class="text-x mt-2 font-light">{{producto.precio | currency: 'USD'}}</h2>
     </div>
     <div class="img h-full relative">
         <img src="{{producto.imagen}}" class="h-full w-full object-cover" alt="{{producto.nombre}}">
