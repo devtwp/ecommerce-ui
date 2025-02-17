@@ -21,6 +21,7 @@ export class ListadoHamburguesasComponent {
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   disabled = false;
+  loading = false;
 
   modalProducto: any = null;
   cantidad: number = 1;
@@ -32,6 +33,8 @@ export class ListadoHamburguesasComponent {
   }
 
   cargarProductos() {
+    // MUESTRA EL ESTADO DE CARGA
+    this.loading = true;
 
     this.productoService.getProductos(/*page, this.itemsPerPage*/).subscribe({
       /*(response: PaginatedResponse<any>) => {
@@ -42,7 +45,8 @@ export class ListadoHamburguesasComponent {
       (error: any) => {
         console.error('Error al cargar productos', error);
       }
-      }*/ 
+      }*/
+        
         next: (productos) => {
           console.log(productos); 
           this.productos = productos;
@@ -52,6 +56,8 @@ export class ListadoHamburguesasComponent {
         },
         complete: () => {
           console.log('Complete');
+          // ELIMINA EL ESTADO DE CARGA
+          this.loading = false;
         }
      
       }
