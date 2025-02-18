@@ -21,6 +21,7 @@ import { IngredienteCardComponent } from './components/ingrediente-card/ingredie
 import { HttpClientModule } from '@angular/common/http';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { CommonModule } from '@angular/common';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CommonModule } from '@angular/common';
     ProductModalComponent,
     ListadoHamburguesasComponent,
     IngredienteCardComponent,
-    CarritoComponent
+    CarritoComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

@@ -5,27 +5,7 @@
     </a>
  
 
-    <!-- NAV OPEN +640PX -->
-    <nav class="hidden sm:flex sm:w-max space-x-6">
-        <a routerLink="/productos" class="hover:text-gray-400 text-lg ">Productos</a>
-        <a routerLink="/sobre-nosotros" class="hover:text-gray-400 text-lg ">Mi pedido</a>
-        <a routerLink="/informacion" class="hover:text-gray-400 text-lg">Información</a>
-    </nav>
-
-
-    <!-- NAV RESPONSIVE -640PX -->
-    <div class="ml-5 sm:hidden sm:w-1/4">
-        <button class="flex sm:hidden" (click)="openNav()">
-            <i class="fa fa-bars text-2xl hover:text-gray-300" aria-hidden="true"></i>
-        </button>
-            <nav [ngClass]="{'h-0 border-none p-0': !navIsOpen, 'h-40 p-5': navIsOpen}" class="space-x-6 sm:hidden pl-5 pr-5 absolute bg-black border-gray-700 border transition-all duration-300 ease-in-out overflow-hidden rounded-md mt-3">
-            <ul class="flex flex-col justify-between h-full">
-                <li><a routerLink="/productos" class="hover:text-gray-400 text-lg">Productos</a></li>
-                <li><a routerLink="/sobre-nosotros" class="hover:text-gray-400 text-lg">Mi pedido</a></li>
-                <li><a routerLink="/informacion" class="hover:text-gray-400 text-lg">Información</a></li>
-            </ul>
-        </nav>
-    </div>
+    <app-nav></app-nav>
     
 
 
