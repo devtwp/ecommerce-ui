@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Producto } from 'src/assets/dto/Producto';
 import { HttpClient } from '@angular/common/http';
 
@@ -14,7 +14,12 @@ export class ProductoService {
   constructor(private http: HttpClient) { }
 
   getProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.apiUrl);
+    return this.http.get<Producto[]>(this.apiUrl).pipe(
+      map(productos => productos.map(p => ({
+        ...p,
+        precio: parseFloat(p.precio as unknown as string) // Convertir `precio` a número
+      })))
+    );
   }
 
 }
