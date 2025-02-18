@@ -1,7 +1,7 @@
 <div class="relative z-30">
   <!-- Ícono del carrito -->
   <button (click)="toggleCart($event)" class="relative">
-    <i class="fas fa-shopping-cart text-2xl text-gray-600 hover:text-gray-900"></i>
+    <i class="fas fa-shopping-cart text-2xl hover:text-gray-300"></i>
     <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">
       {{ productosEnCarrito.length }} <!-- Mostrar el número de productos en el carrito -->
     </span>
@@ -9,7 +9,7 @@
 
   <!-- Sidebar del carrito -->
   <div id="cart-container"
-    class="fixed font-rubik top-0 right-0 w-80 h-full bg-white shadow-lg transform transition-transform border-l-2 duration-300"
+    class="fixed font-rubik text-black top-0 right-0 w-80 h-full bg-white shadow-lg transform transition-transform border-l-2 duration-300"
     [ngClass]="{'translate-x-0': isCartOpen, 'translate-x-full': !isCartOpen}">
 
     <div class="p-4 flex justify-between items-center border-b">
@@ -73,7 +73,7 @@
         <p class="text-lg font-normal">{{ calcularTotal() | currency: 'USD' }}</p>
       </div>
       <button [disabled]="sePuedeComprar" (click)="finalizarCompra()" class="w-full bg-green-500 text-white py-2 mt-4 rounded-md">Finalizar compra</button>
-      <h2 *ngIf="sePuedeComprar" class="font-rubik text-red-700 text-sm mt-2 text-center">Pedidos disponibles Mié-Dom, 19:00-00:00</h2>
+      <h2 *ngIf="sePuedeComprar" class="font-rubik text-red-500 text-sm mt-2 text-center">Pedidos disponibles Mié-Dom, 19:00-00:00</h2>
     </div>
   </div>
 </div>
