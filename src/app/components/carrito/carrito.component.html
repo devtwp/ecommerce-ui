@@ -70,7 +70,7 @@
     <div *ngIf="productosEnCarrito.length > 0" class="p-4 border-t border-gray-200">
       <div class="flex justify-between items-center">
         <h3 class="font-medium">Total</h3>
-        <p class="text-lg font-normal">{{ calcularTotal() }}</p>
+        <p class="text-lg font-normal">{{ calcularTotal() | currency: 'USD' }}</p>
       </div>
       <button [disabled]="sePuedeComprar" (click)="finalizarCompra()" class="w-full bg-green-500 text-white py-2 mt-4 rounded-md">Finalizar compra</button>
       <h2 *ngIf="sePuedeComprar" class="font-rubik text-red-700 text-sm mt-2 text-center">Pedidos disponibles Mié-Dom, 19:00-00:00</h2>

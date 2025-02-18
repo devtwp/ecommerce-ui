@@ -2,11 +2,11 @@
   <!-- Mostrar spinner o mensaje de carga -->
   <div *ngIf="loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 gap-y-0">
     <div
-      class="cursor-pointer font-rubik relative rounded-2xl bg-black grid grid-cols-3 gap-4 w-full h-44 shadow-md hover:shadow-none transition duration-150 shadow-black overflow-hidden max-w-3/4 mx-auto my-4 animate-pulse"
+      class="font-rubik relative rounded-2xl bg-black grid grid-cols-3 gap-4 w-full h-44 shadow-md hover:shadow-none transition duration-150 shadow-black overflow-hidden max-w-3/4 mx-auto my-4 animate-pulso"
       *ngFor="let _ of [].constructor(6)">
 
       <!-- Simulación de contenido en carga -->
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-gray-900 to-black animate-shimmer"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-gray-900 to-black"></div>
 
     </div>
 
