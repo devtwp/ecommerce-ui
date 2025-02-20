@@ -8,11 +8,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class PedidoModalComponent implements OnInit {
 
-  aDomicilio = true;
   horarios: string[] = [];
   nombre:string = "";
   telefono:string= "";
   direccion:string = "";
+  esEnvioDomicilio:boolean = false;
+  pagoConTarjeta:boolean = true;
+  horario:string = "";
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,7 +33,7 @@ export class PedidoModalComponent implements OnInit {
     this.horarios = [];
   
     const ahora = new Date();
-    const tiempoEspera = this.aDomicilio ? 45 : 30; // Tiempo de espera en minutos
+    const tiempoEspera = this.esEnvioDomicilio ? 45 : 30; // Tiempo de espera en minutos
     ahora.setMinutes(ahora.getMinutes() + tiempoEspera);
   
     // Redondear los minutos al siguiente múltiplo de 15
@@ -53,12 +55,12 @@ export class PedidoModalComponent implements OnInit {
     this.horarios.push("00:00");
   }
 
-  cambiarTipoPedido(aDomicilio: boolean) {
-    this.aDomicilio = aDomicilio;
+  cambiarTipoPedido(esEnvioDomicilio: boolean) {
+    this.esEnvioDomicilio = esEnvioDomicilio;
     this.generarHorarios(); // Actualiza la lista de horarios
   }
 
   finalizarPedido(){
-
+    console.log("A domicilio: " + this.esEnvioDomicilio, "horario: " + this.horario, "nombre: " + this.nombre, "telefono: " + this.telefono, "DIRECCION: " + this.direccion, "pago con tarjeta: " +  this.pagoConTarjeta)  
   };
 }

@@ -13,13 +13,15 @@
             <label>Medio de entrega</label>
             <div class="flex flex-col sm:flex-row gap-3 mt-2 text-zinc-200">
                 <div class="flex items-center gap-x-3">
-                    <input id="push-email" name="push-notifications" checked type="radio"
+                    <input id="push-email" name="push-notifications" type="radio"
+                        [(ngModel)]="esEnvioDomicilio" [value]="false"
                         class="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    <label for="push-email" class="block text-sm font-medium">Retiro por local - Lamadrid 1532</label>
-                </div>
-
-                <div class="flex items-center gap-x-3">
-                    <input id="push-nothing" name="push-notifications" type="radio"
+                        <label for="push-email" class="block text-sm font-medium">Retiro por local - Lamadrid 1532</label>
+                    </div>
+                    
+                    <div class="flex items-center gap-x-3">
+                        <input id="push-nothing" name="push-notifications" type="radio"
+                        [(ngModel)]="esEnvioDomicilio" [value]="true"
                         class="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     <label for="push-nothing" class="block text-sm font-medium">Envío a domicilio</label>
                 </div>
@@ -31,8 +33,9 @@
             <label for="horario">Horario de entrega</label>
             <div class="mt-2 grid grid-cols-1 w-full sm:w-32">
                 <select id="horario" name="horario"
+                    [(ngModel)]="horario"
                     class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-zinc-800 py-1.5 pr-8 pl-3 text-base text-zinc-200 outline-1 focus:outline-2 focus:outline-indigo-600 sm:text-sm">
-                    <option *ngFor="let horario of horarios">{{ horario }}</option>
+                    <option *ngFor="let horario of horarios" [value]="horario">{{ horario }}</option>
                 </select>
                 <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
                     viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -51,7 +54,7 @@
                 <div class="absolute h-full w-full content-center pl-3 text-sm transition-all duration-200 ease-in-out transform"
                 [ngClass]="{ 
                         'text-zinc-400 -translate-y-2 text-xs': nombre.length > 0, 
-                        'text-zinc-500 translate-y-0': nombre.length === 0 
+                        'text-zinc-300 translate-y-0': nombre.length === 0 
                     }">
                     Apellido y nombre(s)
                 </div>
@@ -63,15 +66,17 @@
                     }" />
             </div>
             
-            <div class="mt-2 relative w-full sm:w-4/6 text-zinc-200 rounded-md bg-zinc-800 h-12">
+            <div
+            class="mt-2 relative w-full sm:w-4/6 text-zinc-200 rounded-md bg-zinc-800 h-12">
                 <div class="absolute h-full w-full content-center pl-3 text-sm transition-all duration-200 ease-in-out transform"
                 [ngClass]="{ 
                         'text-zinc-400 -translate-y-2 text-xs': direccion.length > 0, 
-                        'text-zinc-500 translate-y-0': direccion.length === 0 
+                        'text-zinc-300 translate-y-0': direccion.length === 0,
+                        'opacity-50 text-zinc-600': !esEnvioDomicilio
                     }">
                     Dirección
                 </div>
-                <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion"
+                <input [disabled]="!esEnvioDomicilio" type="text" id="direccion" name="direccion" [(ngModel)]="direccion"
                 class="pl-3 absolute bg-transparent w-full h-full rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all duration-500"
                 [ngClass]="{
                         'pt-4 text-base': direccion.length > 0, 
@@ -83,7 +88,7 @@
                 <div class="absolute h-full w-full content-center pl-3 text-sm transition-all duration-200 ease-in-out transform"
                 [ngClass]="{ 
                         'text-zinc-400 -translate-y-2 text-xs': telefono.length > 0, 
-                        'text-zinc-500 translate-y-0': telefono.length === 0 
+                        'text-zinc-300 translate-y-0': telefono.length === 0 
                     }">
                     Teléfono
                 </div>
@@ -98,12 +103,13 @@
 
         <!-- METODO DE PAGO -->
         <div class="sm:col-span-3">
-            <label for="horario">Metodo de pago</label>
+            <label for="metodoPago">Metodo de pago</label>
             <div class="mt-2 grid grid-cols-1 w-full sm:w-[23rem] md:w-92 relative">
-                <select id="horario" name="horario"
+                <select id="metodoPago" name="metodoPago"
+                    [(ngModel)]="pagoConTarjeta"
                     class="w-full appearance-none rounded-md bg-zinc-800 py-1.5 pr-8 pl-3 text-base text-zinc-200 outline-1 focus:outline-2 focus:outline-indigo-600 sm:text-sm">
-                    <option>Tarjetas crédito y debito / Mercado Pago (+5%)</option>
-                    <option>Efectivo</option>
+                    <option [value]="true">Tarjetas crédito y debito / Mercado Pago (+5%)</option>
+                    <option [value]="false">Efectivo</option>
                 </select>
                 <svg class="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 size-5 text-gray-500 sm:size-4"
                     viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
