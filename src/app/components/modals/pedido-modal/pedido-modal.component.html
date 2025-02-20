@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="bg-[#0f0f0f] border border-[#161616] w-full max-w-[30rem] p-6 font-rubik mx-auto overflow-y-auto h-[90vh]">
+<div class="bg-[#0f0f0f] border border-[#161616] w-full max-w-[30rem] p-6 font-rubik mx-auto overflow-y-scroll md:overflow-y-visible h-[90vh]">
     <!-- HEADER MODAL -->
     <div class="text-white font-semibold flex justify-between pb-2 font-rubik text-xl border-b-2 border-zinc-500">
         <h1>Finalizar pedido</h1>
@@ -117,11 +117,11 @@
         <!-- BOTÓN FINALIZAR -->
         <div class="md:pr-4 p-4 md:pl-4 pl-0 pr-0 w-full sticky bottom-0 border-none bg-[#0f0f0f]">
             <button type="button"
-            class="flex justify-between items-center w-full p-3 bg-white text-black font-medium rounded-md hover:bg-zinc-300 active:scale-95 transition-all duration-300"
-            (click)="finalizarPedido()">
-            <p>Finalizar pedido</p>
-            <p class="font-normal">{{ data | currency:'USD' }}</p>
-        </button>
-    </div>
+                class="flex justify-between items-center w-full p-3 bg-white text-black font-medium rounded-md hover:bg-zinc-300 active:scale-95 transition-all duration-300"
+                (click)="finalizarPedido()">
+                <p>Finalizar pedido</p>
+                <p class="font-normal">{{ data | currency:'USD' }}</p>
+            </button>
+        </div>
     </form>
 </div>
