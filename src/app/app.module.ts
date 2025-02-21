@@ -23,6 +23,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './components/nav/nav.component';
 import { PedidoModalComponent } from './components/modals/pedido-modal/pedido-modal.component';
+import { ProductCardCarritoComponent } from './components/product-card-carrito/product-card-carrito.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { PedidoModalComponent } from './components/modals/pedido-modal/pedido-mo
     CarritoComponent,
     NavComponent,
     PedidoModalComponent,
+    ProductCardCarritoComponent,
   ],
   imports: [
     BrowserModule,

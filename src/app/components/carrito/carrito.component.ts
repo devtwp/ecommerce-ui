@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { ProductoEnCarrito } from 'src/assets/dto/Producto-en-carrito';
 import { PedidoModalComponent } from '../modals/pedido-modal/pedido-modal.component';
+import { ProductCardCarritoComponent } from '../product-card-carrito/product-card-carrito.component';
 
 @Component({
   selector: 'app-carrito',
@@ -16,6 +17,7 @@ export class CarritoComponent {
   productosEnCarrito: ProductoEnCarrito[] = [];  // Aquí guardamos los productos agregados al carrito
   sePuedeComprar: Boolean = false;
   precioTotal: number = 0;
+  cantidad:number = 1;
 
   constructor(public dialog: MatDialog, private carritoService: CarritoService) { }
 
@@ -76,5 +78,14 @@ export class CarritoComponent {
     this.precioTotal = this.productosEnCarrito.reduce((total, producto) => total + producto.precioTotal, 0);
   }
 
+  aumentar(){
+    this.cantidad++;
+  }
+  
+  disminuir(){
+    if(this.cantidad>1){
+      this.cantidad--;
+    }
+  }
 
 }

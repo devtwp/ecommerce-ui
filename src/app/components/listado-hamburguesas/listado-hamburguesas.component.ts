@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductModalComponent } from '../modals/product-modal/product-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { ProductoService } from 'src/app/services/producto.service';
 import { Producto } from 'src/assets/dto/Producto';
 
@@ -26,7 +24,7 @@ export class ListadoHamburguesasComponent {
   modalProducto: any = null;
   cantidad: number = 1;
 
-  constructor(public dialog: MatDialog, private productoService: ProductoService) { }
+  constructor(private productoService: ProductoService) { }
 
   ngOnInit() {
     this.cargarProductos();
@@ -64,15 +62,6 @@ export class ListadoHamburguesasComponent {
     );
 
     this.productos = this.productosJson.slice();
-  }
-
-  abrirModal(producto: Producto) {
-    const dialogRef = this.dialog.open(ProductModalComponent, {
-      data: producto
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
   }
 
   manejarAgregarAlCarrito(event: { producto: Producto, cantidad: number }) {

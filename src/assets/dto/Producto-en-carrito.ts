@@ -3,5 +3,6 @@ export interface ProductoEnCarrito {
     precioTotal: number;
     ingredientesAgregados: any[];
     ingredientesEliminados: any[];
-    imagen: string
+    imagen: string;
+    cantidad: number;
 }
