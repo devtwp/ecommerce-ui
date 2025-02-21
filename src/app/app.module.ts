@@ -19,6 +19,10 @@ import { ListadoHamburguesasComponent } from './components/listado-hamburguesas/
 import { RouterModule, Routes } from '@angular/router';
 import { IngredienteCardComponent } from './components/ingrediente-card/ingrediente-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { CommonModule } from '@angular/common';
+import { NavComponent } from './components/nav/nav.component';
+import { PedidoModalComponent } from './components/modals/pedido-modal/pedido-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +35,14 @@ import { HttpClientModule } from '@angular/common/http';
     ProductCardComponent,
     ProductModalComponent,
     ListadoHamburguesasComponent,
-    IngredienteCardComponent
+    IngredienteCardComponent,
+    CarritoComponent,
+    NavComponent,
+    PedidoModalComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,

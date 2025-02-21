@@ -1,0 +1,133 @@
+<!-- Modal -->
+<div class="bg-[#0f0f0f] border border-[#161616] w-full max-w-[30rem] p-6 font-rubik mx-auto overflow-y-scroll md:overflow-y-visible h-[90vh]">
+    <!-- HEADER MODAL -->
+    <div class="text-white font-semibold flex justify-between pb-2 font-rubik text-xl border-b-2 border-zinc-500">
+        <h1>Finalizar pedido</h1>
+        <button (click)="cerrarModal()" class="text-zinc-200 hover:text-zinc-500">&times;</button>
+    </div>
+
+    <!-- FORM MODAL -->
+    <form class="m-2 flex flex-col gap-4 text-lg text-white">
+        <!-- MEDIO DE ENTREGA -->
+        <div class="mt-3">
+            <label>Medio de entrega</label>
+            <div class="flex flex-col sm:flex-row gap-3 mt-2 text-zinc-200">
+                <div class="flex items-center gap-x-3">
+                    <input id="push-email" name="push-notifications" type="radio"
+                        [(ngModel)]="esEnvioDomicilio" [value]="false"
+                        class="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        <label for="push-email" class="block text-sm font-medium">Retiro por local - Lamadrid 1532</label>
+                    </div>
+                    
+                    <div class="flex items-center gap-x-3">
+                        <input id="push-nothing" name="push-notifications" type="radio"
+                        [(ngModel)]="esEnvioDomicilio" [value]="true"
+                        class="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <label for="push-nothing" class="block text-sm font-medium">Envío a domicilio</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- HORARIO DE ENTREGA -->
+        <div class="sm:col-span-3">
+            <label for="horario">Horario de entrega</label>
+            <div class="mt-2 grid grid-cols-1 w-full sm:w-32">
+                <select id="horario" name="horario"
+                    [(ngModel)]="horario"
+                    class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-zinc-800 py-1.5 pr-8 pl-3 text-base text-zinc-200 outline-1 focus:outline-2 focus:outline-indigo-600 sm:text-sm">
+                    <option *ngFor="let horario of horarios" [value]="horario">{{ horario }}</option>
+                </select>
+                <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                    viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+        </div>
+        
+        <!-- INFORMACION DEL PEDIDO -->
+        <div>
+            <label>Información del cliente</label>
+            
+            <div class="relative w-full sm:w-4/6 text-zinc-200 rounded-md bg-zinc-800 h-12">
+                <div class="absolute h-full w-full content-center pl-3 text-sm transition-all duration-200 ease-in-out transform"
+                [ngClass]="{ 
+                        'text-zinc-400 -translate-y-2 text-xs': nombre.length > 0, 
+                        'text-zinc-300 translate-y-0': nombre.length === 0 
+                    }">
+                    Apellido y nombre(s)
+                </div>
+                <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre"
+                class="pl-3 absolute bg-transparent w-full h-full rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all duration-500"
+                [ngClass]="{
+                        'pt-4 text-base': nombre.length > 0, 
+                        'pt-0': nombre.length === 0
+                    }" />
+            </div>
+            
+            <div
+            class="mt-2 relative w-full sm:w-4/6 text-zinc-200 rounded-md bg-zinc-800 h-12">
+                <div class="absolute h-full w-full content-center pl-3 text-sm transition-all duration-200 ease-in-out transform"
+                [ngClass]="{ 
+                        'text-zinc-400 -translate-y-2 text-xs': direccion.length > 0, 
+                        'text-zinc-300 translate-y-0': direccion.length === 0,
+                        'opacity-50 text-zinc-600': !esEnvioDomicilio
+                    }">
+                    Dirección
+                </div>
+                <input [disabled]="!esEnvioDomicilio" type="text" id="direccion" name="direccion" [(ngModel)]="direccion"
+                class="pl-3 absolute bg-transparent w-full h-full rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all duration-500"
+                [ngClass]="{
+                        'pt-4 text-base': direccion.length > 0, 
+                        'pt-0': direccion.length === 0
+                    }" />
+            </div>
+
+            <div class="mt-2 relative w-full sm:w-4/6 text-zinc-200 rounded-md bg-zinc-800 h-12">
+                <div class="absolute h-full w-full content-center pl-3 text-sm transition-all duration-200 ease-in-out transform"
+                [ngClass]="{ 
+                        'text-zinc-400 -translate-y-2 text-xs': telefono.length > 0, 
+                        'text-zinc-300 translate-y-0': telefono.length === 0 
+                    }">
+                    Teléfono
+                </div>
+                <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono"
+                class="pl-3 absolute bg-transparent w-full h-full rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all duration-500"
+                [ngClass]="{
+                        'pt-4 text-base': telefono.length > 0, 
+                        'pt-0': telefono.length === 0
+                    }" />
+            </div>
+        </div>
+
+        <!-- METODO DE PAGO -->
+        <div class="sm:col-span-3">
+            <label for="metodoPago">Metodo de pago</label>
+            <div class="mt-2 grid grid-cols-1 w-full sm:w-[23rem] md:w-92 relative">
+                <select id="metodoPago" name="metodoPago"
+                    [(ngModel)]="pagoConTarjeta"
+                    class="w-full appearance-none rounded-md bg-zinc-800 py-1.5 pr-8 pl-3 text-base text-zinc-200 outline-1 focus:outline-2 focus:outline-indigo-600 sm:text-sm">
+                    <option [value]="true">Tarjetas crédito y debito / Mercado Pago (+5%)</option>
+                    <option [value]="false">Efectivo</option>
+                </select>
+                <svg class="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 size-5 text-gray-500 sm:size-4"
+                    viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- BOTÓN FINALIZAR -->
+        <div class="md:pr-4 p-4 md:pl-4 pl-0 pr-0 w-full sticky bottom-0 border-none bg-[#0f0f0f]">
+            <button type="button"
+                class="flex justify-between items-center w-full p-3 bg-white text-black font-medium rounded-md hover:bg-zinc-300 active:scale-95 transition-all duration-300"
+                (click)="finalizarPedido()">
+                <p>Finalizar pedido</p>
+                <p class="font-normal">{{ data | currency:'USD' }}</p>
+            </button>
+        </div>
+    </form>
+</div>

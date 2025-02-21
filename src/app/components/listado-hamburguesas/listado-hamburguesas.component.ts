@@ -14,13 +14,14 @@ import { Producto } from 'src/assets/dto/Producto';
 export class ListadoHamburguesasComponent {
   productosJson: Producto[] = [];
 
-  productos: any[] = [];
+  productos: Producto[] = [];
   length = 9;
 
   hidePageSize = false;
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   disabled = false;
+  loading = false;
 
   modalProducto: any = null;
   cantidad: number = 1;
@@ -32,6 +33,8 @@ export class ListadoHamburguesasComponent {
   }
 
   cargarProductos() {
+    // MUESTRA EL ESTADO DE CARGA
+    this.loading = true;
 
     this.productoService.getProductos(/*page, this.itemsPerPage*/).subscribe({
       /*(response: PaginatedResponse<any>) => {
@@ -42,9 +45,10 @@ export class ListadoHamburguesasComponent {
       (error: any) => {
         console.error('Error al cargar productos', error);
       }
-      }*/ 
+      }*/
+        
         next: (productos) => {
-          console.log(productos); 
+          console.log(productos);
           this.productos = productos;
         },
         error: (error) => {
@@ -52,6 +56,8 @@ export class ListadoHamburguesasComponent {
         },
         complete: () => {
           console.log('Complete');
+          // ELIMINA EL ESTADO DE CARGA
+          this.loading = false;
         }
      
       }
@@ -60,17 +66,16 @@ export class ListadoHamburguesasComponent {
     this.productos = this.productosJson.slice();
   }
 
-  abrirModal(producto: any) {
+  abrirModal(producto: Producto) {
     const dialogRef = this.dialog.open(ProductModalComponent, {
       data: producto
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal se cerró');
     });
   }
 
-  manejarAgregarAlCarrito(event: { producto: any, cantidad: number }) {
+  manejarAgregarAlCarrito(event: { producto: Producto, cantidad: number }) {
     console.log('Producto agregado al carrito:', event.producto, 'Cantidad:', event.cantidad);
     // Lógica para agregar al carrito
   }

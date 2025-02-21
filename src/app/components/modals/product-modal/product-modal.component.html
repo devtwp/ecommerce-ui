@@ -1,24 +1,24 @@
 <!-- Modal -->
-<div class="bg-black">
-    <div class="max-w-5xl mx-auto">
-        <div class="modal-content rounded-lg shadow-l">
-            <div class="font-rubik text-white grid md:grid-cols-2 gap-4 p-5">
+<div class="bg-[#0f0f0f] border border-[#161616]">
+    <div class="max-w-5xl mx-auto overflow-hidden">
+        <div class="modal-content rounded-lg shadow-l relative">
+            <div class="font-rubik text-white grid md:grid-cols-2 gap-4 p-5 pb-0 md:pb-5 h-[35rem] md:overflow-hidden overflow-y-auto custom-scroll">
 
                 <!-- Botón de cerrar -->
-                <button type="button" class="absolute top-0 right-0 p-2 pr-4 text-white text-xl hover:text-gray-300"
+                <button type="button" class="absolute top-2 right-4 text-white text-xl hover:text-gray-300 z-10 md:right-2"
                     data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
-                    <i class="fas fa-times"></i> <!-- Icono de FontAwesome para la X -->
+                    <i class="fas fa-times"></i>
                 </button>
 
                 <!-- Imagen del producto -->
-                <div class="flex items-center justify-center overflow-hidden rounded-lg">
-                    <img class="rounded-sm w-full md:w-[35rem] h-[30rem] object-cover" [src]="data?.imagen"
+                <div class="flex items-center justify-center overflow-hidden rounded-lg w-full h-[15rem] md:h-full">
+                    <img class="rounded-sm w-full h-full object-cover" [src]="data?.imagen"
                         alt="{{ data?.nombre }}">
                 </div>
 
                 <!-- Información del producto -->
-                <div class="flex flex-col justify-between p-5">
-                    <div class="flex flex-col gap-5 overflow-y-auto pr-5 max-h-96 custom-scroll">
+                <div class="flex flex-col justify-between p-5 pb-0 mr-3">
+                    <div class="flex flex-col gap-5 md:overflow-y-scroll custom-scroll h-max md:h-[25rem]">
                         <div class="flex flex-col">
                             <h2 class="text-2xl font-bold">{{ data?.nombre }}</h2>
                             <p class="text-base text-gray-400 font-medium mt-1">{{ data?.descripcion }}</p>
@@ -37,22 +37,23 @@
                         <h1 class="text-lg font-semibold">Sacar de la {{ data?.nombre }}</h1>
                         <ul>
                             <li *ngFor="let ingrediente of listadoIngredientesTiene">
-                                <app-ingrediente-card *ngFor="let ingrediente of listadoIngredientesTiene" [ingrediente]="ingrediente" (cambioSeleccion)="actualizarListadoEliminados($event)">
+                                <app-ingrediente-card [ingrediente]="ingrediente" (cambioSeleccion)="actualizarListadoEliminados($event)">
                                 </app-ingrediente-card>
+                            </li>
                         </ul>
-                        
                     </div>
 
-                    <!-- Botón para agregar al carrito -->
-                    <div class="p-4">
+                    <div class="p-4 w-full sticky bottom-0 border-none bg-[#0f0f0f]">
                         <button type="button"
-                            class="flex justify-between w-full p-3 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600"
+                            class="flex font-rubik justify-between w-full p-3 bg-white text-black font-medium rounded-md hover:bg-zinc-300 active:scale-95 transition-all duration-300"
                             (click)="agregar()">
                             <p>Agregar</p>
-                            <p>{{ precioTotal | currency:'USD' }}</p>
+                            <p class="font-normal">{{ precioTotal | currency:'USD' }}</p>
                         </button>
                     </div>
+
                 </div>
+                <!-- Botón para agregar al carrito -->
             </div>
         </div>
     </div>

@@ -1,0 +1,79 @@
+<div class="relative z-30">
+  <!-- Ícono del carrito -->
+  <button (click)="toggleCart($event)" class="relative">
+    <i class="fas fa-shopping-cart text-2xl hover:text-gray-300"></i>
+    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">
+      {{ productosEnCarrito.length }} <!-- Mostrar el número de productos en el carrito -->
+    </span>
+  </button>
+
+  <!-- Sidebar del carrito -->
+  <div id="cart-container"
+    class="fixed font-rubik text-black top-0 right-0 w-80 h-full bg-white shadow-lg transform transition-transform border-l-2 duration-300"
+    [ngClass]="{'translate-x-0': isCartOpen, 'translate-x-full': !isCartOpen}">
+
+    <div class="p-4 flex justify-between items-center border-b">
+      <h2 class="text-lg font-semibold">Carrito</h2>
+      <button (click)="toggleCart($event)" class="text-gray-500 hover:text-gray-900">&times;</button>
+    </div>
+
+    <ul class="divide-y divide-gray-200 flex flex-col h-max max-h-[30rem] mr-3 ml-2 overflow-y-auto custom-scroll">
+      <!-- Mostrar los productos en el carrito -->
+      <li *ngFor="let producto of productosEnCarrito" class="py-4">
+        <div class="grid grid-cols-4 gap-2 ">
+          <div class="col-span-1">
+            <img class="h-[3rem] border-[0.01rem] rounded-md border-gray-300" src="{{producto.imagen}}"
+              alt="{{producto.nombre}}">
+          </div>
+
+          <div class="col-span-3">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-medium">{{ producto.nombre }}</p>
+                <p class="text-sm font-light text-gray-500">Precio: {{ producto.precioTotal | currency:'USD' }}</p>
+              </div>
+              <button (click)="eliminarProducto(producto); $event.stopPropagation()"
+                class="text-red-500 text-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+
+            <!-- Mostrar ingredientes agregados -->
+            <div *ngIf="producto.ingredientesAgregados.length > 0" class="mt-2">
+              <h3 class="font-normal text-sm">Ingredientes Agregados:</h3>
+              <ul class="list-disc pl-5 text-sm text-gray-600">
+                <li *ngFor="let ingrediente of producto.ingredientesAgregados">
+                  <p>{{ ingrediente.ingrediente }}</p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Mostrar ingredientes eliminados -->
+            <div *ngIf="producto.ingredientesEliminados.length > 0" class="mt-2">
+              <h3 class="font-normal text-sm">Ingredientes Eliminados:</h3>
+              <ul class="list-disc pl-5 text-sm text-gray-600">
+                <li *ngFor="let ingrediente of producto.ingredientesEliminados">
+                  <p>{{ ingrediente.ingrediente }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Mensaje si el carrito está vacío -->
+    <div *ngIf="productosEnCarrito.length === 0" class="w-3/4 m-auto mt-10 text-center">
+      <h1 class="font-bold font-rubik text-xl">El carrito está vacío</h1>
+      <h2 class="font-rubik text-gray-600 text-sm">Los productos que agregues aparecerán aquí</h2>
+    </div>
+
+    <!-- Total del carrito -->
+    <div *ngIf="productosEnCarrito.length > 0" class="p-4 border-t border-gray-200">
+      <div class="flex justify-between items-center">
+        <h3 class="font-medium">Total</h3>
+        <p class="text-lg font-normal">{{ precioTotal | currency: 'USD' }}</p>
+      </div>
+      <button [disabled]="sePuedeComprar" (click)="finalizarCompra($event)" class="w-full bg-green-500 text-white py-2 mt-4 rounded-md active:scale-95 transition-all duration-300">Finalizar pedido</button>
+      <h2 *ngIf="sePuedeComprar" class="font-rubik text-red-500 text-sm mt-2 text-center">Pedidos disponibles Mié-Dom, 19:00-00:00</h2>
+    </div>
+  </div>
+</div>

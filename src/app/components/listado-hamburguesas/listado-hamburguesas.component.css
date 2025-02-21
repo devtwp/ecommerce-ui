@@ -1,0 +1,8 @@
+@keyframes pulso {
+    50% {
+        opacity: .88;
+    }
+}
+.animate-pulso {
+    animation: pulso 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
