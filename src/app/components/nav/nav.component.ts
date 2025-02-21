@@ -27,4 +27,8 @@ export class NavComponent implements OnInit {
       }
     }
 
+  cerrarNav(){
+    this.navIsOpen= false;
+  }
+
 }
