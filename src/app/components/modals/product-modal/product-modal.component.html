@@ -1,24 +1,25 @@
 <!-- Modal -->
 <div class="bg-[#0f0f0f] border border-[#161616]">
-    <div class="max-w-5xl mx-auto overflow-hidden">
-        <div class="modal-content rounded-lg shadow-l relative">
-            <div class="font-rubik text-white grid md:grid-cols-2 gap-4 p-5 pb-0 md:pb-5 h-[35rem] md:overflow-hidden overflow-y-auto custom-scroll">
+    <div class="mx-auto overflow-hidden">
+        <div
+            class="modal-content md:w-[80vw] max-w-80vw rounded-lg shadow-l relative font-rubik text-white grid md:grid-cols-2 gap-4 p-5 pb-0 md:pb-5 h-[35rem] md:overflow-hidden overflow-y-auto custom-scroll">
 
-                <!-- Botón de cerrar -->
-                <button type="button" class="absolute top-2 right-4 text-white text-xl hover:text-gray-300 z-10 md:right-2"
-                    data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
-                    <i class="fas fa-times"></i>
-                </button>
+            <!-- Botón de cerrar -->
+            <button type="button"
+                class="absolute top-2 right-4 text-white text-xl hover:text-gray-300 z-10 md:right-2"
+                data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
 
-                <!-- Imagen del producto -->
-                <div class="flex items-center justify-center overflow-hidden rounded-lg w-full h-[15rem] md:h-full">
-                    <img class="rounded-sm w-full h-full object-cover" [src]="data?.imagen"
-                        alt="{{ data?.nombre }}">
-                </div>
+            <!-- Imagen del producto -->
+            <div class="flex items-center justify-center overflow-hidden rounded-lg w-full h-[15rem] md:h-full">
+                <img class="rounded-sm w-full h-full object-cover" [src]="data?.imagen" alt="{{ data?.nombre }}">
+            </div>
 
+            <div class="relative">
                 <!-- Información del producto -->
-                <div class="flex flex-col justify-between p-5 pb-0 mr-3">
-                    <div class="flex flex-col gap-5 md:overflow-y-scroll custom-scroll h-max md:h-[25rem]">
+                <div class="flex flex-col justify-between p-5 pb-0">
+                    <div class="flex flex-col gap-5 md:overflow-y-scroll custom-scroll h-max md:h-[27rem]">
                         <div class="flex flex-col">
                             <h2 class="text-2xl font-bold">{{ data?.nombre }}</h2>
                             <p class="text-base text-gray-400 font-medium mt-1">{{ data?.descripcion }}</p>
@@ -26,9 +27,11 @@
 
                         <!-- LISTADO DE INGREDIENTES FALTANTES -->
                         <div>
-                            <h1 class="text-lg font-semibold">Agregar a la {{data?.nombre}}</h1>
+                            <h1 class="text-lg font-semibold">Agregar a la {{ data?.nombre }}</h1>
                             <ul>
-                                <app-ingrediente-card *ngFor="let ingrediente of listadoIngredientesAgregar" [ingrediente]="ingrediente" (cambioSeleccion)="actualizarListadoSeleccionados($event)">
+                                <app-ingrediente-card *ngFor="let ingrediente of listadoIngredientesAgregar"
+                                    [ingrediente]="ingrediente"
+                                    (cambioSeleccion)="actualizarListadoSeleccionados($event)">
                                 </app-ingrediente-card>
                             </ul>
                         </div>
@@ -37,23 +40,38 @@
                         <h1 class="text-lg font-semibold">Sacar de la {{ data?.nombre }}</h1>
                         <ul>
                             <li *ngFor="let ingrediente of listadoIngredientesTiene">
-                                <app-ingrediente-card [ingrediente]="ingrediente" (cambioSeleccion)="actualizarListadoEliminados($event)">
+                                <app-ingrediente-card [ingrediente]="ingrediente"
+                                    (cambioSeleccion)="actualizarListadoEliminados($event)">
                                 </app-ingrediente-card>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="p-4 w-full sticky bottom-0 border-none bg-[#0f0f0f]">
+                    <!-- Botón para agregar al carrito -->
+                    <div
+                        class="md:w-11/12 w-full grid grid-cols-4 sm:grid-cols-5 md:grid-cols-10 gap-1 sticky md:absolute bottom-0 bg-[#0f0f0f] pt-3 pb-3 justify-center">
+
+                        <!-- Cantidad hamburguesas -->
+                        <div
+                            class="flex col-span-1 gap-1 sm:col-span-2 md:col-span-3 justify-around items-center text-white mx-auto">
+                            <i class="fa fa-minus-circle text-base hover:text-zinc-400 cursor-pointer" aria-hidden="true" (click)="disminuirCantidad()"
+                            [ngClass]="{'text-zinc-400' : cantidad === 1}"></i>
+                            <p
+                                class="border border-zinc-400 px-3 py-1 rounded-md text-xs sm:text-sm min-w-[2.5rem] text-center">
+                                {{ cantidad }}
+                            </p>
+                            <i class="fa fa-plus-circle text-base hover:text-zinc-400 cursor-pointer" aria-hidden="true" (click)="aumentarCantidad()"></i>
+                        </div>
+
+                        <!-- Botón para agregar -->
                         <button type="button"
-                            class="flex font-rubik justify-between w-full p-3 bg-white text-black font-medium rounded-md hover:bg-zinc-300 active:scale-95 transition-all duration-300"
+                            class="flex col-span-3 sm:col-span-3 md:col-span-7 justify-between items-center w-5/6 p-2 md:p-3 bg-white text-black text-xs font-medium rounded-md hover:bg-zinc-300 active:scale-95 transition-all duration-300 mx-auto"
                             (click)="agregar()">
                             <p>Agregar</p>
                             <p class="font-normal">{{ precioTotal | currency:'USD' }}</p>
                         </button>
                     </div>
-
                 </div>
-                <!-- Botón para agregar al carrito -->
             </div>
         </div>
     </div>

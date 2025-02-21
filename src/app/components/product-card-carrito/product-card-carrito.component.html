@@ -1,0 +1,44 @@
+<div class="grid grid-cols-4 gap-2 ">
+  <div class="col-span-1">
+    <img class="h-[3rem] border-[0.01rem] rounded-md border-gray-300" src="{{producto.imagen}}"
+      alt="{{producto.nombre}}">
+  </div>
+
+  <div class="col-span-3">
+    <div class="flex justify-between items-start">
+      <div>
+        <p class="font-medium">{{ producto.nombre }}</p>
+        <p class="text-sm font-light text-gray-500">Precio: {{ producto.precioTotal | currency:'USD' }}</p>
+      </div>
+      <button (click)="eliminarProducto(producto); $event.stopPropagation()" class="text-red-500 text-sm"><i
+          class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+
+    <!-- Mostrar ingredientes agregados -->
+    <div *ngIf="producto.ingredientesAgregados.length > 0" class="mt-2">
+      <h3 class="font-normal text-sm">Ingredientes Agregados:</h3>
+      <ul class="list-disc pl-5 text-sm text-gray-600">
+        <li *ngFor="let ingrediente of producto.ingredientesAgregados">
+          <p>{{ ingrediente.ingrediente }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Mostrar ingredientes eliminados -->
+    <div *ngIf="producto.ingredientesEliminados.length > 0" class="mt-2">
+      <h3 class="font-normal text-sm">Ingredientes Eliminados:</h3>
+      <ul class="list-disc pl-5 text-sm text-gray-600">
+        <li *ngFor="let ingrediente of producto.ingredientesEliminados">
+          <p>{{ ingrediente.ingrediente }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="flex text-sm mt-2 bg-zinc-200 w-max gap-2 items-center pr-2 pl-2 p-1 rounded-full text-black"
+      (click)="$event.stopPropagation()">
+      <i class="fa fa-minus" (click)="disminuir()"></i>
+      <p class="w-4 text-center">{{cantidad}}</p> <!-- Ancho fijo para el texto -->
+      <i class="fa fa-plus" (click)="aumentar()"></i>
+    </div>
+  </div>
+</div>

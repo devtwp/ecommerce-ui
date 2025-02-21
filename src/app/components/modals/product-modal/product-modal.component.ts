@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, Inject, OnInit } from '@angular/core';
+import { Component, Input, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CarritoService } from 'src/app/services/carrito.service';
 
@@ -14,6 +14,8 @@ export class ProductModalComponent implements OnInit {
 
   // Inicializa el precioTotal después de que se reciba el ingrediente
   precioTotal: number = 0;
+
+  cantidad:number = 1;
 
   // Listado de ingredientes
   listadoIngredientesTieneJSON = [
@@ -43,12 +45,25 @@ export class ProductModalComponent implements OnInit {
     this.carritoService.agregarProducto({
       nombre: this.data.nombre,
       precioTotal: this.precioTotal,
+      cantidad: this.cantidad,
       ingredientesEliminados: this.listadoIngredientesEliminados,
       ingredientesAgregados: this.listadoIngredientesAgregados,
       imagen: this.data.imagen
     });
 
     this.closeModal();  // Cierra el modal 
+  }
+
+  aumentarCantidad(){
+    this.cantidad++;
+    this.calcularPrecio()
+  }
+  
+  disminuirCantidad(){
+    if(this.cantidad > 1){
+      this.cantidad--;
+    }
+    this.calcularPrecio()
   }
 
   constructor(
@@ -83,7 +98,8 @@ export class ProductModalComponent implements OnInit {
       diferencia += ingrediente.precio;
     });
     
-    this.precioTotal = this.data.precio + diferencia; 
+    this.precioTotal = this.data.precio + diferencia;
+    this.precioTotal = this.precioTotal * this.cantidad;
   }
 
   actualizarListadoSeleccionados(event: any) {

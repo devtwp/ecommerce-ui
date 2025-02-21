@@ -20,43 +20,7 @@
     <ul class="divide-y divide-gray-200 flex flex-col h-max max-h-[30rem] mr-3 ml-2 overflow-y-auto custom-scroll">
       <!-- Mostrar los productos en el carrito -->
       <li *ngFor="let producto of productosEnCarrito" class="py-4">
-        <div class="grid grid-cols-4 gap-2 ">
-          <div class="col-span-1">
-            <img class="h-[3rem] border-[0.01rem] rounded-md border-gray-300" src="{{producto.imagen}}"
-              alt="{{producto.nombre}}">
-          </div>
-
-          <div class="col-span-3">
-            <div class="flex justify-between items-start">
-              <div>
-                <p class="font-medium">{{ producto.nombre }}</p>
-                <p class="text-sm font-light text-gray-500">Precio: {{ producto.precioTotal | currency:'USD' }}</p>
-              </div>
-              <button (click)="eliminarProducto(producto); $event.stopPropagation()"
-                class="text-red-500 text-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            </div>
-
-            <!-- Mostrar ingredientes agregados -->
-            <div *ngIf="producto.ingredientesAgregados.length > 0" class="mt-2">
-              <h3 class="font-normal text-sm">Ingredientes Agregados:</h3>
-              <ul class="list-disc pl-5 text-sm text-gray-600">
-                <li *ngFor="let ingrediente of producto.ingredientesAgregados">
-                  <p>{{ ingrediente.ingrediente }}</p>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Mostrar ingredientes eliminados -->
-            <div *ngIf="producto.ingredientesEliminados.length > 0" class="mt-2">
-              <h3 class="font-normal text-sm">Ingredientes Eliminados:</h3>
-              <ul class="list-disc pl-5 text-sm text-gray-600">
-                <li *ngFor="let ingrediente of producto.ingredientesEliminados">
-                  <p>{{ ingrediente.ingrediente }}</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <app-product-card-carrito [producto]="producto"></app-product-card-carrito>
       </li>
     </ul>
 
@@ -72,8 +36,11 @@
         <h3 class="font-medium">Total</h3>
         <p class="text-lg font-normal">{{ precioTotal | currency: 'USD' }}</p>
       </div>
-      <button [disabled]="sePuedeComprar" (click)="finalizarCompra($event)" class="w-full bg-green-500 text-white py-2 mt-4 rounded-md active:scale-95 transition-all duration-300">Finalizar pedido</button>
-      <h2 *ngIf="sePuedeComprar" class="font-rubik text-red-500 text-sm mt-2 text-center">Pedidos disponibles Mié-Dom, 19:00-00:00</h2>
+      <button [disabled]="sePuedeComprar" (click)="finalizarCompra($event)"
+        class="w-full bg-green-500 text-white py-2 mt-4 rounded-md active:scale-95 transition-all duration-300">Finalizar
+        pedido</button>
+      <h2 *ngIf="sePuedeComprar" class="font-rubik text-red-500 text-sm mt-2 text-center">Pedidos disponibles Mié-Dom,
+        19:00-00:00</h2>
     </div>
   </div>
 </div>
