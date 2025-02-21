@@ -15,9 +15,9 @@
     id="nav-container"
     class="space-x-6 sm:hidden pl-5 pr-5 absolute bg-black border-gray-700 border transition-all duration-300 ease-in-out overflow-hidden rounded-md mt-3">
     <ul class="flex flex-col justify-between h-full">
-      <li><a routerLink="/hamburguesas" class="hover:text-gray-400 text-lg">Productos</a></li>
-      <li><a routerLink="/sobre-nosotros" class="hover:text-gray-400 text-lg">Mi pedido</a></li>
-      <li><a routerLink="/informacion" class="hover:text-gray-400 text-lg">Información</a></li>
+      <li><a routerLink="/hamburguesas" (click)="cerrarNav()" class="hover:text-gray-400 text-lg">Productos</a></li>
+      <li><a routerLink="/sobre-nosotros" (click)="cerrarNav()" class="hover:text-gray-400 text-lg">Mi pedido</a></li>
+      <li><a routerLink="/informacion" (click)="cerrarNav()" class="hover:text-gray-400 text-lg">Información</a></li>
     </ul>
   </nav>
 </div>
